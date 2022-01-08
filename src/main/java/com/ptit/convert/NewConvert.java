@@ -20,4 +20,21 @@ public class NewConvert {
 		dto.setCategoryCode(entity.getCategory().getCode());
 		return dto;
 	}
+
+	public static NewEntity toEntity(NewDTO dto) {
+		NewEntity entity = new NewEntity();
+		entity.setTitle(dto.getTitle());
+		entity.setThumbnail(dto.getThumbnail());
+		entity.setShortDescription(dto.getShortDescription());
+		entity.setContent(dto.getContent());
+		return entity;
+	}
+
+	public static NewEntity toEntity(NewDTO dto, NewEntity entity) {
+		entity.setTitle(dto.getTitle());
+		entity.setThumbnail(dto.getThumbnail());
+		entity.setShortDescription(dto.getShortDescription());
+		entity.setContent(dto.getContent());
+		return entity;
+	}
 }

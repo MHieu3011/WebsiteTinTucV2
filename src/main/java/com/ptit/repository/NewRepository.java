@@ -6,4 +6,5 @@ import com.ptit.entity.NewEntity;
 
 public interface NewRepository extends JpaRepository<NewEntity, Long> {
 
+
 }
