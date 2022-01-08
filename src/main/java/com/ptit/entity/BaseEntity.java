@@ -47,32 +47,16 @@ public abstract class BaseEntity {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Time createdDate) {
-		this.createdDate = createdDate;
-	}
-
 	public Time getModifiedDate() {
 		return modifiedDate;
-	}
-
-	public void setModifiedDate(Time modifiedDate) {
-		this.modifiedDate = modifiedDate;
 	}
 
 	public String getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
 	public String getModifiedBy() {
 		return modifiedBy;
-	}
-
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
 	}
 
 }
