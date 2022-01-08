@@ -1,59 +1,74 @@
 package com.ptit.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity extends BaseEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Column(name = "username", nullable = false, length = 10)
+	private String userName;
 
-	@Column
-	private String name;
+	@Column(name = "password", nullable = false)
+	private String password;
 
-	@Column
-	private int age;
+	@Column(name = "fullname")
+	private String fullName;
 
-	@Column
-	private String test;
+	@Column(name = "status")
+	private Integer status;
 
-	public Long getId() {
-		return id;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "roleid"))
+	private List<RoleEntity> roles = new ArrayList<>();
+
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getName() {
-		return name;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public int getAge() {
-		return age;
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
-	public String getTest() {
-		return test;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setTest(String test) {
-		this.test = test;
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public List<RoleEntity> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<RoleEntity> roles) {
+		this.roles = roles;
 	}
 
 }
