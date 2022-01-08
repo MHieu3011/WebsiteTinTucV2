@@ -12,4 +12,10 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("/web/home");
 		return mav;
 	}
+
+	@GetMapping(value = "/dang-nhap")
+	public ModelAndView loginPage() {
+		ModelAndView mav = new ModelAndView("/login");
+		return mav;
+	}
 }
