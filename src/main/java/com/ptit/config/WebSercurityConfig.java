@@ -1,5 +1,6 @@
 package com.ptit.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.ptit.service.impl.CustomerUserDetailService;
+
 @Configuration
 @EnableWebSecurity
 public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
@@ -17,6 +20,9 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	@Autowired
+	private CustomerUserDetailService userDetailService;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -31,7 +37,9 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-			.withUser("user").password(passwordEncoder().encode("1")).authorities("USER");
+		auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
+//			.and()
+//			.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("123456")).authorities("USER");
+//		System.out.println(passwordEncoder().encode("123456"));
 	}
 }
