@@ -28,7 +28,9 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/admin/**", "/web/**", "/login/**").permitAll()	//load resources/static/**
-			.anyRequest().authenticated().and()
+			.antMatchers("/admin*").hasAuthority("ADMIN")
+			.anyRequest().authenticated()
+			.and()
 			.formLogin().loginPage("/dang-nhap").permitAll()
 			.loginProcessingUrl("/j_spring_security_check")
 			.defaultSuccessUrl("/trang-chu")
